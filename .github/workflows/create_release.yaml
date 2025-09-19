@@ -23,10 +23,10 @@ jobs:
           name: ${{env.RELEASE_NAME}}
           token: ${{ secrets.BORGZORT_TOKEN }}
           generateReleaseNotes: true
-      # - uses: act10ns/slack@v2
-      #   if: failure()
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_ILIOS_DEPLOYMENT_WEBHOOK_URL }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     message: Release Failed {{ env.GITHUB_SERVER_URL }}/{{ env.GITHUB_REPOSITORY }}/actions/runs/{{ env.GITHUB_RUN_ID }}
+      - uses: act10ns/slack@v2
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          message: Release Failed {{ env.GITHUB_SERVER_URL }}/{{ env.GITHUB_REPOSITORY }}/actions/runs/{{ env.GITHUB_RUN_ID }}
